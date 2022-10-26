@@ -1,0 +1,156 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "codecommit:Merge*",
+                "codecommit:Get*",
+                "codecommit:TagResource",
+                "codecommit:BatchAssociateApprovalRuleTemplateWithRepositories",
+                "codecommit:BatchGet*",
+                "codecommit:GitPull",
+                "codecommit:UntagResource",
+                "codecommit:BatchDisassociateApprovalRuleTemplateFromRepositories",
+                "codecommit:Update*",
+                "codecommit:OverridePullRequestApprovalRules",
+                "codecommit:Post*",
+                "codecommit:EvaluatePullRequestApprovalRules",
+                "codecommit:Test*",
+                "codecommit:Create*",
+                "codecommit:List*",
+                "codecommit:DisassociateApprovalRuleTemplateFromRepository",
+                "codecommit:Describe*",
+                "codecommit:Put*",
+                "codecommit:GitPush",
+                "codecommit:DeleteFile",
+                "codecommit:BatchDescribe*",
+                "codecommit:AssociateApprovalRuleTemplateWithRepository",
+                "codecommit:DeleteBranch"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringEquals": {
+                    "aws:ResourceTag/Department": "Some_Department"
+                }
+            }
+        },
+        {
+            "Sid": "VisualEditor1",
+            "Effect": "Allow",
+            "Action": [
+                "codestar-notifications:CreateNotificationRule",
+                "codestar-notifications:DescribeNotificationRule",
+                "codestar-notifications:UpdateNotificationRule",
+                "codestar-notifications:Subscribe",
+                "codestar-notifications:Unsubscribe"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "StringLike": {
+                    "codestar-notifications:NotificationsForResource": "arn:aws:codecommit:*"
+                }
+            }
+        },
+        {
+            "Sid": "VisualEditor2",
+            "Effect": "Allow",
+            "Action": [
+                "events:DescribeRule",
+                "events:EnableRule",
+                "events:PutRule",
+                "codestar-connections:GetConnection",
+                "iam:ListServiceSpecificCredentials",
+                "events:DeleteRule",
+                "events:PutTargets",
+                "iam:ListSSHPublicKeys",
+                "events:RemoveTargets",
+                "sns:Subscribe",
+                "events:ListTargetsByRule",
+                "events:DisableRule",
+                "iam:ListAccessKeys"
+            ],
+            "Resource": [
+                "arn:aws:events:*:*:rule/codecommit*",
+                "arn:aws:codestar-connections:*:*:connection/*",
+                "arn:aws:iam::*:user/${aws:username}",
+                "arn:aws:sns:*:*:codecommit*"
+            ]
+        },
+        {
+            "Sid": "VisualEditor3",
+            "Effect": "Allow",
+            "Action": "iam:CreateServiceLinkedRole",
+            "Resource": "arn:aws:iam::*:role/aws-service-role/codeguru-reviewer.amazonaws.com/AWSServiceRoleForAmazonCodeGuruReviewer",
+            "Condition": {
+                "StringLike": {
+                    "iam:AWSServiceName": "codeguru-reviewer.amazonaws.com"
+                }
+            }
+        },
+        {
+            "Sid": "VisualEditor4",
+            "Effect": "Allow",
+            "Action": [
+                "iam:ListSSHPublicKeys",
+                "iam:GetSSHPublicKey",
+                "iam:UploadSSHPublicKey",
+                "iam:DeleteSSHPublicKey",
+                "iam:UpdateSSHPublicKey"
+            ],
+            "Resource": "arn:aws:iam::*:user/${aws:username}"
+        },
+        {
+            "Sid": "VisualEditor5",
+            "Effect": "Allow",
+            "Action": [
+                "iam:CreateServiceSpecificCredential",
+                "iam:UpdateServiceSpecificCredential",
+                "iam:ResetServiceSpecificCredential",
+                "iam:DeleteServiceSpecificCredential"
+            ],
+            "Resource": "arn:aws:iam::*:user/${aws:username}"
+        },
+        {
+            "Sid": "VisualEditor6",
+            "Effect": "Allow",
+            "Action": [
+                "codeguru-reviewer:AssociateRepository",
+                "sns:ListSubscriptionsByTopic",
+                "lambda:ListFunctions",
+                "sns:GetTopicAttributes",
+                "codestar-notifications:ListNotificationRules",
+                "events:PutRule",
+                "sns:ListTopics",
+                "chatbot:DescribeSlackChannelConfigurations",
+                "codecommit:ListRepositories",
+                "codeguru-reviewer:DisassociateRepository",
+                "codestar-notifications:ListTagsForResource",
+                "events:DeleteRule",
+                "events:PutTargets",
+                "codestar-notifications:ListEventTypes",
+                "codestar-notifications:ListTargets",
+                "codeguru-reviewer:ListRepositoryAssociations",
+                "codeguru-reviewer:ListCodeReviews",
+                "codeguru-reviewer:DescribeRepositoryAssociation",
+                "iam:ListUsers",
+                "events:RemoveTargets",
+                "codeguru-reviewer:DescribeCodeReview"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "VisualEditor7",
+            "Effect": "Allow",
+            "Action": "sns:Unsubscribe",
+            "Resource": "arn:aws:sns:*:*:codecommit*"
+        },
+        {
+            "Sid": "VisualEditor8",
+            "Effect": "Allow",
+            "Action": "codestar-connections:ListConnections",
+            "Resource": "arn:aws:codestar-connections:*:*:connection/*"
+        }
+    ]
+}
